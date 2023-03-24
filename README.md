@@ -1,10 +1,10 @@
 # Employee Tracker
 
 ### <u> Description: </u>
-This application presents with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role for the user. It also presents tables with selections that items can be added to.
+This application allows the user to access the following commands: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role. It visually presents a table with salary, role, department, name, and manager. 
 
 ### <u> Notes: </u>
-- N/A
+- version 1
 
 ### <u> Screenshot: </u>
 ![Employee Tracker: Screenshot](./Assets/images/Employee%20Tracker%20Terminal.jpg)
