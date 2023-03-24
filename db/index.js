@@ -8,17 +8,37 @@ class DB {
     // create our methods to interact with the database
     findAllEmployees() {
         return this.db.promise().query(
-            "SELECT * FROM employee;"
+            "SELECT employee.id,employee.first_name,employee.last_name, role.title, role.salary, department.name FROM employee LEFT JOIN role ON employee.role_id =role.id LEFT JOIN department ON role.department_id=department.id; "
         );
     }
-    findSingleEmployee() {
+    findAllRoles() {
         return this.db.promise().query(
-            "SELECT * FROM employee WHERE id = 1;"
+            "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id ;"
+        )
+    }
+    findAllDepartments() {
+        return this.db.promise().query(
+            "SELECT department.id, department.name FROM department;"
         )
     }
     addDepartment(departmentName) {
         return this.db.promise().query(
-            "INSERT INTO department(name) VALUES(?)", departmentName
+            "INSERT INTO department SET ?", departmentName
+        )
+    }
+    addRole(role){
+        return this.db.promise().query(
+            "INSERT INTO role SET ?", role  
+        )
+    }
+    addEmployee(employee){
+        return this.db.promise().query(
+            "INSERT INTO employee SET ?", employee  
+        )
+    }
+    updateEmployeeRole(employeeId, roleId){
+        return this.db.promise().query(
+            "UPDATE employee SET role_id = ? WHERE id= ?", [roleId,employeeId]  
         )
     }
 };

@@ -30,29 +30,28 @@ function promptChoices() {
 
       switch (answer.selection) {
         case "view all departments":
-          console.log("department view");
+          viewAllDepartments();
           break;
         case "view all roles":
-          console.log("roles view");
+          viewAllRoles();
           break;
         case "view all employees":
           showAllEmployees();
           break;
         case "add a department":
-          console.log("department view");
+          addDepartment();
           break;
         case "add a role":
-          console.log("role view");
+          addRole();
           break;
         case "add an employee":
-          console.log("add an employee view");
+          addEmployee();
           break;
           case "update an employee role":
-            console.log("employee role view");
+            updateEmployee();
             break;
         default:
-          console.log("default view");
-          break;
+          quit();
       }
     });
 }
@@ -64,7 +63,20 @@ function showAllEmployees() {
     })
     .then(() => promptChoices());
 }
-
+function viewAllRoles() {
+  db.findAllRoles()
+    .then(([rows]) => {
+      console.table(rows);
+    })
+    .then(() => promptChoices());
+}
+function viewAllDepartments() {
+  db.findAllDepartments()
+    .then(([rows]) => {
+      console.table(rows);
+    })
+    .then(() => promptChoices());
+}
 function addNewDepartment() {
   inquirer
     .prompt([
@@ -75,9 +87,22 @@ function addNewDepartment() {
       },
     ])
     .then((response) => {
-      db.addDepartment(response.name);
+      db.addDepartment(response.name)
+      .then(()=>console.log("added department to database"))
       // then display all the departments
     });
+}
+function addRole() {
+  db.findAllDepartments() 
+  .then(([rows])=>{
+    let departments = rows
+    const departmentChoices = departments.map(({id,name})=>({
+name:name, 
+value:id
+
+    }))
+    
+  })
 }
 
 promptChoices();
