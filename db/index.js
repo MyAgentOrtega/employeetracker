@@ -23,12 +23,12 @@ class DB {
     }
     addDepartment(departmentName) {
         return this.db.promise().query(
-            "INSERT INTO department SET ?", departmentName
+            "INSERT INTO department SET ?", {name:departmentName}
         )
     }
-    addRole(role){
+    addRole(roleobj){
         return this.db.promise().query(
-            "INSERT INTO role SET ?", role  
+            "INSERT INTO role SET ?", roleobj  
         )
     }
     addEmployee(employee){
